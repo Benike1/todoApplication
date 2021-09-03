@@ -26,7 +26,7 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::latest()->paginate(5);
-        return view('todo.index',compact('todos'))
+        return view('todos.index',compact('todos'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
