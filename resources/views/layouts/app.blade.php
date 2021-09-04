@@ -21,7 +21,8 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 Todo Applicaton
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -37,11 +38,18 @@
                         <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                         <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @else
-                        <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-                        <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                        <li><a class="nav-link" href="{{ route('todos.index') }}">Manage Product</a></li>
+                        @if (Auth::user()->can('user-edit'))
+                            <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                        @endif
+                        @if (Auth::user()->can('role-edit'))
+                            <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Roles</a></li>
+                        @endif
+                        @if (Auth::user()->can('todo-edit'))
+                            <li><a class="nav-link" href="{{ route('todos.index') }}">Manage Todos</a></li>
+                        @endif
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
@@ -54,7 +62,8 @@
                                 </a>
 
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     @csrf
                                 </form>
                             </div>
