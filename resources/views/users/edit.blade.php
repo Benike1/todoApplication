@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -12,7 +11,6 @@
             </div>
         </div>
     </div>
-
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -26,7 +24,7 @@
     @endif
 
 
-    {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+    {!! Form::model($user, ['method' => 'PATCH', 'enctype' => 'multipart/form-data', 'route' => ['users.update', $user->id]]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -58,6 +56,22 @@
                 {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Image:</strong>
+                {!! Form::file('image') !!}
+                <br>
+            </div>
+        </div>
+
+        @if($user->image)
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <strong>Choosen Image:</strong>
+                <img class="image" src="{{asset('/storage/images/'.$user->image)}}" alt="image"
+                     style="width: 80px;height: 80px;">
+            </div>
+        @endif
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
