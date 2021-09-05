@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -34,7 +35,9 @@ class TodoController extends Controller
      */
     public function create()
     {
-        return view('todos.create');
+        $users = User::pluck('name', 'id')->all();
+
+        return view('todos.create',compact('users'));
     }
 
     /**
@@ -44,8 +47,8 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'title' => 'required',
+            'text' => 'required',
         ]);
 
         Todo::create($request->all());
@@ -80,8 +83,8 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         request()->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'title' => 'required',
+            'text' => 'required',
         ]);
 
         $todo->update($request->all());

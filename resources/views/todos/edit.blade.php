@@ -25,28 +25,37 @@
         </div>
     @endif
 
-
-    <form action="{{ route('todos.update',$todo->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $todo->name }}" class="form-control" placeholder="Name">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $todo->detail }}</textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+    {!! Form::model($todo, ['method' => 'PATCH', 'route' => ['todos.update', $todo->id]]) !!}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Title:</strong>
+                {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
             </div>
         </div>
-    </form>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Text:</strong>
+                {!! Form::text('text', null, array('placeholder' => 'Text','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Completed:</strong>
+                <label>{{ Form::checkbox('is_complete', $todo->id, array('class' => 'name')) }}
+                    {{ $todo->is_complete }}</label>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="form-group">
+                <strong>Expiration:</strong>
+                {{ Form::input('dateTime-local', 'expire_at', $todo->expire_at, ['placeholder' => 'Expiration', 'class' => 'form-control']) }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    {!! Form::close() !!}
 @endsection

@@ -13,18 +13,29 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
-                {{ $todo->name }}
+                <strong>Title:</strong>
+                {{ $todo->title }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Details:</strong>
-                {{ $todo->detail }}
+                <strong>Text:</strong>
+                {{ $todo->text }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Completed:</strong>
+                {{ $todo->is_complete ? 'Yes' : 'No' }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Expiration:</strong>
+                {{ $todo->expire_at }}
             </div>
         </div>
     </div>

@@ -26,26 +26,35 @@
     @endif
 
 
-    <form action="{{ route('todos.store') }}" method="POST">
-        @csrf
-
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+    {!! Form::open(array('route' => 'todos.store','method'=>'POST')) !!}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Title:</strong>
+                {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
             </div>
         </div>
-    </form>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Text:</strong>
+                {!! Form::text('text', null, array('placeholder' => 'Text','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>User:</strong>
+                {!! Form::select('user_id', $users, $users, array('class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Completed:</strong>
+                {!! Form::checkbox('is_complete') !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    {!! Form::close() !!}
 @endsection
