@@ -160,4 +160,14 @@ class UserController extends Controller
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }
+
+
+    public function listTodo(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $id = $request->get('id');
+        $todos = User::where('id', $id)->first()->getTodos()->get();
+        $html = view('users.todo-list', compact('todos'))->render();
+        return response()->json(['html' => $html]);
+//        return redirect()->route('api.todolist', compact('todos'));
+    }
 }

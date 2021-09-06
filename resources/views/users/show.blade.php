@@ -37,15 +37,15 @@
                 @endif
             </div>
         </div>
+        @if($user->image)
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                @if($user->image)
                     <img class="image" src="{{asset('images/'.$user->image)}}" alt="image"
                          style="width: 80px;height: 80px;">
-                @endif
             </div>
         </div>
+        @endif
 
     </div>
 @endsection
